@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HTML : MRZYB</title>
+        <style>
+
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Sacramento&display=swap');
+
+html{
+      scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+   font-family: 'Roboto', sans-serif;
+    -webkit-touch-callout: none;     -webkit-user-select: none; 
+    -khtml-user-select: none; 
+    -moz-user-select: none; 
+    -ms-user-select: none; 
+    -o-user-select: none; 
+    user-select: none; 
+}
+
+.container{
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    background: #f5f5f5;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 20px 20px #000;
+}
+
+.card{
+    background: #ffffff;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 20px;
+    box-shadow: 0 11px 3px #fbcb2e;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.title{
+    font-size: 30px;
+    margin: 20px;
+    width: calc(100%-10px);
+    word-break: nowrap;
+    overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+}
+
+.author{
+    margin: 0 0 0 25px;
+    color: #b80e0e;
+     width: calc(100%-20px);
+    word-break: nowrap;
+    overflow: hidden;
+white-space: nowrap;
+text-overflow: ellipsis;
+font-size: 20px;
+}
+
+.image{ }
+
+.control{
+    width: 100%;
+    text-align: center;
+}
+
+.panel{
+    width: calc(100% - 150px);
+}
+
+.image img{
+    width: 150px;
+    min-height: 100%;
+    object-fit: cover;
+    line-height: 0;
+}
+
+.panel button{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #757575;
+}
+
+.panel .playbtn{
+    transform: scale(1.5);
+    text-align: center;
+}
+
+.control{
+    margin: 40px 0 20px 0px;
+}
+
+.banner{
+    width: 100%;
+    height: 200px;
+    background: url(https://www.udrop.com/cache/plugins/filepreviewer/1390751/2a4efc8fdccbd2f8e07a64d20725907aa7b25450c730b2de7df2626226acfe27/1100x800_cropped.jpg);
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav{
+    width: 100%;
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    transition: 0.5s;
+}
+
+.icon{
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.text{
+    color: #fff;
+    text-shadow: 0 0 15px #000;
+    font-size: 35px;
+    font-family: 'Sacramento', cursive;
+}
+
+.searchbar{
+    width: 100%;
+    height: 55px;
+    background: #fff;
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    z-index: 4;
+    transition: 0.5s;
+}
+
+.icon{
+    min-width: 55px;
+}
+
+.back{
+    color: #07CFD4;
+}
+
+#inp{
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.loadingmusic{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 7;
+    background: #07CFD4;
+    color: #fff;
+    width: 100%;
+    height: 30px;
+    transform: scaleY(0);
+    transition: 0.5s;
+    transform-origin: bottom;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader div{
+    width: 10px;
+    height: 10px;
+    background: #07CFD4;
+    float: right;
+}
+
+.drop{
+    width: 250px;
+    height: 100vh;
+    background: #f5f5f5;
+    box-shadow: 0 0 10px #0009;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    z-index: 8;
+    transition: 0.5s;
+}
+
+.crossm{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+    font-size: 20px;
+    color: #07CFD4;
+}
+
+.preloader{
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    background: #f5f5f5;
+}
+
+.loaders{
+    width: 35px;
+    height: 35px;
+    border-top: 4px solid #07CFD4;
+    border-bottom: 4px solid #07CFD4;
+    border-left: 4px solid #07CFD4;
+    border-right: 4px solid transparent;
+    border-radius: 100px;
+    animation: load 10s linear infinite;
+}
+
+@keyframes load {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(3600deg); }
+}
+
+/* Floating Telegram Icon */
+.telegram-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background: #0088cc;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 32px;
+    box-shadow: 0px 4px 10px #0005;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.telegram-float:hover {
+    background: #0a9be6;
+}
+
+        </style>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+
+    <div id="drop" class="drop">
+        <div onclick="closem()" class="crossm">╳</div>
+        <div class="mtext">
+            <div align="center" class="xstv">
+                <a href="go:Thanks">
+                    <img class="xstv" src="https://media2.giphy.com/media/adfvwQX1BWJ1h9k6fl/giphy.webp" width="240px" height="140px">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <nav id="nav">
+        <div onclick="openm()" class="menu icon"><i class="material-icons">menu</i></div>
+        <div onclick="opensearch()" class="search icon"><i class="material-icons">search</i></div>
+    </nav>
+
+    <div id="sbar" class="searchbar">
+        <div onclick="closesearch()" class="back icon">
+            <i class="material-icons">arrow_back</i>
+        </div>
+        <input oninput="search()" placeholder="Search" id="inp"/>
+    </div>
+
+    <div class="banner">
+        <div id="text" class="text"></div>
+    </div>
+
+    <div id="container" class="container"></div>
+
+    <div id="loadmusic" class="loadingmusic">
+        <div class="loader">
+            <div></div><div></div><div></div><div></div>
+            <div></div><div></div><div></div><div></div>
+        </div>
+    </div>
+
+    <div id="pre" class="preloader">
+        <div class="loaders"></div>
+    </div>
+
+<script>
+/* (JS asli tidak diubah) */
+var markup = function(id, name, author, image){
+return `
+<div class="card">
+    <div class="panel">
+        <div class="title">${name}</div>
+        <div class="author">${author}</div>
+        <div class="control">
+            <button onclick="mint()" class="prev"><i class="material-icons">fast_rewind</i></button>
+            <button id="playbtn${id}" onclick="play(this, ${id})" class="playbtn">
+                <i class="material-icons">play_arrow</i>
+            </button>
+            <button onclick="maxt()" class="next"><i class="material-icons">fast_forward</i></button>
+        </div>
+    </div>
+    <div class="image"><img src="${image}"/></div>
+</div>
+`;
+};
+
+var aud = new Audio(); 
+var lastsong = null;
+
+var songs = [
+{ name: "Lenong ", artist: "SI JANTUK", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://audio.jukehost.co.uk/lCUgvRbjRSxlOGsb4hbd4JAwbedmzDYq", isPlay: false },
+{ name: "Lenong", artist: "MADU RACUN", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://www.udrop.com/file/LNAR/BOKNAS_(TOPENG_BETAWI_SETIA_WARGA)_-_MADU_DAN_RACUN.mp3", isPlay: false },
+{ name: "Lenong", artist: "BUJANG", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://www.udrop.com/file/LNAQ/Bokir_Bujang.mp3", isPlay: false },
+{ name: "Lenong", artist: "MABOK LAGI", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://www.udrop.com/file/LNAS/lenong_betawi_(mabok_lagi).mp3", isPlay: false },
+{ name: "Lenong", artist: "PERAWAN DESA", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://www.udrop.com/file/LNAV/TOPENG_BOKIR_PERAWAN_DESA.mp3", isPlay: false },
+{ name: "Lenong", artist: "GILA RONGGENG", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://www.udrop.com/file/LNAP/Bokir_GILA_RONGGENG_-_Lenong_Topeng_Betawi_setia_warga.mp3", isPlay: false },
+{ name: "Lenong", artist: "GUBUK DERITA", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://www.udrop.com/file/LNAT/GUBUK_DERITA,_Topeng_Lenong_Betawi_H._Bokir_Setia_Warga.mp3", isPlay: false },
+{ name: "Lenong", artist: "KECE MEMBLE", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU", song: "https://www.udrop.com/file/LNAU/TOPENG_BETAWI_SETIA_WARGA_Memble_dan_Kece_FULL_MP3.mp3", isPlay: false }
+];
+
+window.onload = function (){
+    var container = document.getElementById("container");
+    for(var i=0; i<=songs.length - 1; i++){
+        container.innerHTML += markup(i, songs[i].name, songs[i].artist, songs[i].poster);
+    }
+    document.getElementById("pre").style.display = "none";
+};
+
+function opensearch(){ document.getElementById("sbar").style.right = "0"; scrollTo(0, 145);}
+function openm(){ document.getElementById("drop").style.left = "0"; }
+function closem(){ document.getElementById("drop").style.left = "-300px"; }
+function closesearch(){ document.getElementById("sbar").style.right = "-100%"; document.getElementById("inp").value = ""; }
+
+function search(){
+    var m = document.getElementsByClassName("card");
+    var inp = document.getElementById("inp").value.toUpperCase();
+    for (var i = 0; i <= m.length-1; i++){
+        m[i].style.display = m[i].innerHTML.toUpperCase().indexOf(inp) != -1 ? "" : "none";
+    }
+}
+
+function mint(){ if(aud.currentTime > 10) aud.currentTime -= 10; }
+function maxt(){ aud.currentTime += 10; }
+
+function play(e, i){
+    if(!songs[i].isPlay){
+        var loadmusic = document.getElementById("loadmusic");
+        loadmusic.style.transform = "scaleY(1)";
+        aud.addEventListener('loadeddata', ()=>{ loadmusic.style.transform = "scaleY(0)"; }, false);
+
+        if(lastsong != null){
+            songs[lastsong].isPlay = false;
+            document.getElementById("playbtn"+lastsong).innerHTML = "<i class='material-icons'>play_arrow</i>";
+        }
+
+        e.innerHTML = "<i class='material-icons'>pause</i>";
+        aud.src = songs[i].song;
+        aud.play();
+        songs[i].isPlay = true;
+        lastsong = i;
+
+    } else {
+        e.innerHTML = "<i class='material-icons'>play_arrow</i>";
+        songs[i].isPlay = false;
+        aud.pause();
+        lastsong = null;
+    }
+}
+</script>
+
+<!-- Floating Telegram Icon -->
+<a href="https://t.me/mrzyb_movie" class="telegram-float">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" 
+         style="width:32px;height:32px;">
+</a>
+
+</body>
+</html>
