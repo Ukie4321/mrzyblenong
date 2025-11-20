@@ -1,100 +1,215 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>HTML : MRZYB</title>
-        <style>
+<head>
+    <title>HTML : MRZYB (Fixed Version)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+            user-select: none;
+            min-height: 100vh;
+        }
+        .container {
+            padding: 10px;
+            box-sizing: border-box;
+            width: 100%;
+            min-height: 100vh;
+            padding-bottom: 100px;
+            background: #f5f5f5;
+            position: relative;
+            box-shadow: 0 20px 20px #000;
+        }
+        .card {
+            background: #fff;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            border-radius: 20px;
+            box-shadow: 0 11px 3px #fbcb2e;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .title {
+            font-size: 30px;
+            margin: 20px;
+            width: calc(100% - 10px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .author {
+            margin: 0 0 0 25px;
+            color: #b80e0e;
+            width: calc(100% - 20px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 20px;
+        }
+        .panel { width: calc(100% - 150px); }
+        .image img {
+            width: 150px;
+            height: 100%;
+            object-fit: cover;
+        }
+        .control {
+            width: 100%;
+            text-align: center;
+            margin: 40px 0 20px 0;
+        }
+        .banner {
+            width: 100%;
+            height: 200px;
+            background: url("https://www.udrop.com/cache/plugins/filepreviewer/1390751/2a4efc8fdccbd2f8e07a64d20725907aa7b25450c730b2de7df2626226acfe27/1100x800_cropped.jpg");
+            background-size: cover;
+            background-position: center;
+            position: sticky;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        nav {
+            width: 100%;
+            height: 55px;
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            transition: 0.5s;
+        }
+        .icon {
+            width: 55px;
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+        }
+        .text {
+            color: #fff;
+            text-shadow: 0 0 15px #000;
+            font-size: 35px;
+            font-family: 'Sacramento', cursive;
+        }
+        .searchbar {
+            width: 100%;
+            height: 55px;
+            background: #fff;
+            display: flex;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            z-index: 4;
+            transition: 0.5s;
+        }
+        .preloader {
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            background: #f5f5f5;
+        }
+        .loaders {
+            width: 35px;
+            height: 35px;
+            border-top: 4px solid #07CFD4;
+            border-bottom: 4px solid #07CFD4;
+            border-left: 4px solid #07CFD4;
+            border-right: 4px solid transparent;
+            border-radius: 100px;
+            animation: load 1s linear infinite;
+        }
+        @keyframes load {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
 
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Sacramento&display=swap');
+<nav id="nav">
+    <div onclick="openm()" class="menu icon"><i class="material-icons">menu</i></div>
+    <div onclick="opensearch()" class="search icon"><i class="material-icons">search</i></div>
+</nav>
 
-html{
-      scroll-behavior: smooth;
-}
+<div id="sbar" class="searchbar">
+    <div onclick="closesearch()" class="back icon"><i class="material-icons">arrow_back</i></div>
+    <input oninput="search()" placeholder="Search" id="inp" />
+</div>
 
-body {
-    margin: 0;
-    padding: 0;
-    background: #f5f5f5;
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-   font-family: 'Roboto', sans-serif;
-    -webkit-touch-callout: none;     -webkit-user-select: none; 
-    -khtml-user-select: none; 
-    -moz-user-select: none; 
-    -ms-user-select: none; 
-    -o-user-select: none; 
-    user-select: none; 
-}
+<div class="banner">
+    <div id="text" class="text"></div>
+</div>
 
-.container{
-    padding: 10px;
-    box-sizing: border-box;
-    width: 100%;
-    min-height: 100vh;
-    padding-bottom: 100px;
-    background: #f5f5f5;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 20px 20px #000;
-}
+<div id="container" class="container"></div>
 
-.card{
-    background: #ffffff;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    border-radius: 20px;
-    box-shadow: 0 11px 3px #fbcb2e;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
+<div id="pre" class="preloader"><div class="loaders"></div></div>
 
-.title{
-    font-size: 30px;
-    margin: 20px;
-    width: calc(100%-10px);
-    word-break: nowrap;
-    overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
-}
+<script>
+var markup = function(id, name, author, image) {
+    return `
+    <div class="card">
+        <div class="panel">
+            <div class="title">${name}</div>
+            <div class="author">${author}</div>
+            <div class="control">
+                <button onclick="mint()" class="prev"><i class="material-icons">fast_rewind</i></button>
+                <button id="playbtn${id}" onclick="play(this, ${id})" class="playbtn"><i class="material-icons">play_arrow</i></button>
+                <button onclick="maxt()" class="next"><i class="material-icons">fast_forward</i></button>
+            </div>
+        </div>
+        <div class="image"><img src="${image}" /></div>
+    </div>`;
+};
 
-.author{
-    margin: 0 0 0 25px;
-    color: #b80e0e;
-     width: calc(100%-20px);
-    word-break: nowrap;
-    overflow: hidden;
-white-space: nowrap;
-text-overflow: ellipsis;
-font-size: 20px;
-}
+var aud = new Audio();
+aud.preload = "auto";
+var lastsong = null;
 
-.image{ }
+var songs = [
+    {
+        name: "Perawan Desa",
+        artist: "Lawakan Bokir",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU",
+        song: "https://archive.org/download/LawakBokirKumpulKebo/LAWAKAN%20BOKIR%20YANG%20JARANG%20BEREDAR%20%20(PERAWAN%20DESA).mp3",
+        isPlay: false
+    },
+    {
+        name: "Bokir Jadi Bujang",
+        artist: "Lawakan Bokir",
+        poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQORsSZpZEmC4k0TAiLbWRy668gWZzsYlov4Q&usqp=CAU",
+        song: "https://archive.org/download/LawakBokirKumpulKebo/TOPENG%20BETAWI%20SETIA%20WARGA%20%E2%96%BA%E2%80%9CBOKIR%20jadi%20BUJANG%E2%80%9C%20FULL%20KASET.mp3",
+        isPlay: false
+    }
+];
 
-.control{
-    width: 100%;
-    text-align: center;
-}
+window.onload = function() {
+    var container = document.getElementById("container");
+    for (var i = 0; i < songs.length; i++) {
+        container.innerHTML += markup(i, songs[i].name, songs[i].artist, songs[i].poster);
+    }
+    document.getElementById("pre").style.display = "none";
+};
+</script>
 
-.panel{
-    width: calc(100% - 150px);
-}
-
-.image img{
-    width: 150px;
-    min-height: 100%;
-    object-fit: cover;
-    line-height: 0;
-}
-
-.panel button{
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #757575;
-}
+</body>
+</html>
 
 .panel .playbtn{
     transform: scale(1.5);
